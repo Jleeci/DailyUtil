@@ -1,3 +1,5 @@
+
+
 package com.Jleeci.util;
 
 import sun.misc.BASE64Decoder;
@@ -7,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/** 
  * Created by Jleeci on 2018/5/31.
  */
 public class OperationFile {
@@ -52,7 +54,7 @@ public class OperationFile {
     private static void filesMapRemoveAll() {
         files.clear();
     }
-
+ 
     /**
      * 读取某个文件(filePath)内容 以行为单位读取
      *
@@ -120,11 +122,17 @@ public class OperationFile {
      */
     public static void writeContentToFile(byte[] content, String filepath, boolean append) throws IOException {
         FileOutputStream out = null;
-        File file = null;
+        File file = null, parentFile = null;
 
         try {
             file = new File(filepath);
             if (!file.exists()) {
+                if (file.getParent() != null && !"".equals(file.getParent())) {
+                    parentFile = new File(file.getParent());
+                    if (parentFile != null && !parentFile.exists()) {
+                        parentFile.mkdirs();
+                    }
+                }
                 file.createNewFile();
             }
             out = new FileOutputStream(file, append);
