@@ -21,4 +21,27 @@ public class NextPrime {
             }
         }
     }
+     /**
+     * 计算一个数的最大质因数
+     * @param num
+     */
+    public static void test(long num) {
+        long x = 1;
+        long factor = 1;
+        while (x < num) {
+            if (num % x == 0) {
+                factor = num / x;
+                for (int i = 2; i < factor; i++) {
+                    if (factor % i == 0) {
+                        break;
+                    } else {
+                        System.out.println(factor);
+                        System.out.println(x);
+                        return;
+                    }
+                }
+            }
+            x++;
+        }
+    }
 }
